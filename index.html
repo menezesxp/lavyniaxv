@@ -31,7 +31,7 @@
             opacity: 0.3;
         }
 
-        /* --- BANNER SIMÉTRICO ROSA COM ANIMAÇÕES --- */
+        /* --- BANNER PRINCIPAL --- */
         .banner {
             width: 100%;
             height: 450px;
@@ -45,22 +45,13 @@
             background-size: cover;
             background-position: center;
             border-bottom: 3px solid #ce0f69;
-            box-shadow: 0 10px 40px rgba(206, 15, 105, 0.5);
             position: relative;
         }
 
-        /* ANIMAÇÃO DE FLUTUAR SUAVE */
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-
-        /* ANIMAÇÃO DE BRILHO PULSANTE */
-        @keyframes glowPulse {
-            0% { text-shadow: 0 0 15px #ce0f69, 0 0 30px #ce0f69; }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+        @keyframes glowPulsePink {
+            0%, 100% { text-shadow: 0 0 15px #ce0f69, 0 0 30px #ce0f69; }
             50% { text-shadow: 0 0 25px #ce0f69, 0 0 50px #ce0f69, 0 0 75px #ce0f69; }
-            100% { text-shadow: 0 0 15px #ce0f69, 0 0 30px #ce0f69; }
         }
 
         .nome-debutante {
@@ -68,39 +59,25 @@
             font-size: clamp(60px, 15vw, 130px);
             color: #fff;
             margin: 0;
-            line-height: 1;
-            /* Aplicação das animações */
-            animation: float 4s ease-in-out infinite, glowPulse 3s infinite;
-        }
-
-        /* ANIMAÇÃO DE BRILHO BRANCO PULSANTE PARA 15 ANOS */
-        @keyframes glowWhitePulse {
-            0% { text-shadow: 0 0 10px #ffffff, 0 0 20px #ce0f69; }
-            50% { text-shadow: 0 0 15px #ffffff, 0 0 30px #ffffff, 0 0 40px #ce0f69; }
-            100% { text-shadow: 0 0 10px #ffffff, 0 0 20px #ce0f69; }
+            animation: float 4s ease-in-out infinite, glowPulsePink 3s infinite;
         }
 
         .sobrenome {
-            /* NOVA FONTE MAIS CHAMATIVA (Playfair Display) */
             font-family: 'Playfair Display', serif;
-            font-size: clamp(24px, 8vw, 48px); /* Aumentado para mais destaque */
-            letter-spacing: 2px; /* Reduzido o espaçamento para a nova fonte */
+            font-size: clamp(24px, 8vw, 48px);
             text-transform: uppercase;
-            margin-top: 10px;
             font-weight: 700;
-            color: #ffffff;
-            /* Aplicação das animações */
-            animation: float 4s ease-in-out infinite 0.5s, glowWhitePulse 3s infinite; /* Delay de 0.5s na flutuação */
+            animation: float 4s ease-in-out infinite 0.5s, glowPulsePink 3s infinite;
         }
 
-        /* --- BOTÕES LADO A LADO --- */
+        /* --- BOTÕES DE BORBOLETA --- */
         .menu-borboleta {
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 10px;
             margin-top: -40px;
-            z-index: 10;
+            z-index: 100;
             width: 95%;
             max-width: 800px;
         }
@@ -110,95 +87,150 @@
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
-            width: 25%; 
-            min-width: 85px;
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: 0.3s;
-            text-decoration: none;
-            font-weight: bold;
-            text-transform: uppercase;
-            font-size: clamp(8px, 2vw, 10px);
-            color: white;
-            text-align: center;
+            width: 25%; min-width: 85px; height: 80px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: 0.3s;
+            text-decoration: none; font-weight: bold; text-transform: uppercase;
+            font-size: clamp(8px, 2vw, 10px); color: white;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
         }
 
-        .botao-borboleta:hover {
-            transform: translateY(-5px) scale(1.05);
-            filter: drop-shadow(0 0 10px #ce0f69);
-        }
-
-        /* --- CONTADOR --- */
-        .countdown-container {
+        /* --- CARROSSEL --- */
+        .carousel-wrapper {
+            width: 100%;
+            max-width: 1200px;
+            margin: 60px 0;
+            position: relative;
+            height: 420px;
             display: flex;
-            justify-content: space-around;
-            width: 90%;
-            max-width: 500px;
-            margin: 40px 0;
-            padding: 20px;
-            background: rgba(206, 15, 105, 0.05);
-            border-radius: 15px;
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(206, 15, 105, 0.3);
-        }
-
-        .countdown-item span {
-            font-size: clamp(1.2rem, 5vw, 2.5rem);
-            font-weight: bold;
-            color: #fff;
-            text-shadow: 0 0 10px #ce0f69;
-            display: block;
-        }
-
-        .countdown-item p {
-            font-size: 10px;
-            margin: 0;
-            color: #ff85b3;
-            text-transform: uppercase;
-        }
-
-        /* --- GALERIA JARDIM DE MEMÓRIAS --- */
-        .secao-titulo {
-            font-family: 'Great Vibes', cursive;
-            font-size: clamp(2.5rem, 8vw, 4rem);
-            color: #fff;
-            text-shadow: 0 0 20px #ce0f69;
-            margin: 30px 0;
-        }
-
-        .jardim-container {
-            display: flex;
-            justify-content: center;
             align-items: center;
-            gap: 8px;
-            width: 95%;
-            margin-bottom: 50px;
+            justify-content: center;
         }
 
-        .foto-asa {
-            background-size: cover;
-            background-position: center;
-            border: 1px solid #ce0f69;
-            box-shadow: 0 0 15px rgba(206, 15, 105, 0.4);
+        .carousel-container {
+            width: 100%; height: 100%;
+            position: relative;
+            display: flex; align-items: center; justify-content: center;
         }
 
-        .f1 { width: 22%; height: 250px; border-radius: 80px 10px 10px 80px; }
-        .f2 { width: 18%; height: 200px; border-radius: 10px 50px 50px 10px; margin-top: 30px; }
-        .separador-corpo { width: 4px; height: 100px; background: #ce0f69; border-radius: 10px; box-shadow: 0 0 15px #ce0f69; }
-        .f3 { width: 18%; height: 200px; border-radius: 50px 10px 10px 50px; margin-top: 30px; }
-        .f4 { width: 22%; height: 250px; border-radius: 10px 80px 80px 10px; }
+        .carousel-slide {
+            position: absolute;
+            width: 320px; height: 400px;
+            background-size: cover; background-position: center;
+            border-radius: 15px;
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .carousel-slide.active {
+            opacity: 1; transform: scale(1.1); z-index: 5;
+            border: 2px solid #ce0f69;
+            box-shadow: 0 0 40px rgba(206, 15, 105, 0.7);
+        }
+
+        .carousel-slide.prev { opacity: 0.5; transform: translateX(-320px) scale(0.85); z-index: 3; filter: blur(2px); }
+        .carousel-slide.next { opacity: 0.5; transform: translateX(320px) scale(0.85); z-index: 3; filter: blur(2px); }
+
+        .nav-btn {
+            position: absolute;
+            background: rgba(206, 15, 105, 0.3);
+            color: white; border: 2px solid rgba(206, 15, 105, 0.5);
+            width: 50px; height: 50px; border-radius: 50%;
+            cursor: pointer; z-index: 15;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .btn-left { left: 20px; } .btn-right { right: 20px; }
+
+        /* --- SEÇÃO UNIFICADA (CRONÔMETRO + ENDEREÇO) --- */
+        .info-section {
+            text-align: center;
+            margin-bottom: 80px;
+            padding: 40px 20px;
+            width: 100%;
+            background: rgba(206, 15, 105, 0.05); /* Leve fundo para unificar */
+            border-radius: 30px;
+            max-width: 800px;
+        }
+
+        .countdown-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.8rem;
+            color: #ffffff;
+            margin: 0 0 20px 0;
+            text-shadow: 0 0 10px #bf9b30, 0 0 20px #bf9b30, 0 0 30px #bf9b30;
+            animation: glowPulseGold 3s infinite;
+        }
+
+        .countdown-box { 
+            display: flex; 
+            justify-content: center; 
+            gap: 15px; 
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .countdown-item {
+            background: rgba(206, 15, 105, 0.1);
+            border: 1px solid rgba(206, 15, 105, 0.4);
+            border-radius: 10px; min-width: 80px; padding: 15px 5px;
+        }
+        .countdown-item span { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: bold; text-shadow: 0 0 10px #ce0f69; display: block; }
+        .countdown-item p { font-size: 0.7rem; margin: 0; text-transform: uppercase; color: #ffb3d9; }
+
+        .endereco-texto {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #f0f0f0;
+            margin: 0 auto 25px auto;
+        }
+
+        .endereco-texto b {
+            color: #ffb3d9;
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 8px;
+            text-shadow: 0 0 10px rgba(206, 15, 105, 0.5);
+        }
+
+        /* Botão Google Maps */
+        .btn-maps {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 25px;
+            background: transparent;
+            color: #bf9b30;
+            border: 1px solid #bf9b30;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            box-shadow: 0 0 10px rgba(191, 155, 48, 0.2);
+        }
+
+        .btn-maps:hover {
+            background: #bf9b30;
+            color: black;
+            box-shadow: 0 0 20px #bf9b30;
+            transform: translateY(-3px);
+        }
+
+        @keyframes glowPulseGold {
+            0%, 100% { text-shadow: 0 0 10px #bf9b30, 0 0 20px #bf9b30; }
+            50% { text-shadow: 0 0 20px #bf9b30, 0 0 40px #bf9b30; }
+        }
 
         @media (max-width: 600px) {
-            .banner { height: 300px; }
-            .menu-borboleta { gap: 5px; margin-top: -30px; }
-            .botao-borboleta { height: 60px; min-width: 75px; }
-            .f1, .f2, .f3, .f4 { height: 140px; margin-top: 0 !important; }
-            .separador-corpo { height: 60px; }
-            .sobrenome { font-size: 24px; } /* Ajuste de tamanho mobile */
+            .carousel-slide { width: 180px; height: 260px; }
+            .carousel-slide.prev { transform: translateX(-90px) scale(0.7); }
+            .carousel-slide.next { transform: translateX(90px) scale(0.7); }
+            .countdown-title { font-size: 2rem; }
+            .endereco-texto { font-size: 0.9rem; }
         }
     </style>
 </head>
@@ -218,32 +250,66 @@
         <a href="#" class="botao-borboleta">Presentes</a>
     </nav>
 
-    <div class="countdown-container">
-        <div class="countdown-item"><span id="days">00</span><p>Dias</p></div>
-        <div class="countdown-item"><span id="hours">00</span><p>Hrs</p></div>
-        <div class="countdown-item"><span id="minutes">00</span><p>Min</p></div>
-        <div class="countdown-item"><span id="seconds">00</span><p>Seg</p></div>
-    </div>
+    <section class="carousel-wrapper">
+        <button class="nav-btn btn-left" onclick="changeSlide(-1)">&#10094;</button>
+        <button class="nav-btn btn-right" onclick="changeSlide(1)">&#10095;</button>
+        <div class="carousel-container">
+            <div class="carousel-slide" style="background-image: url('foto1.jpg');"></div>
+            <div class="carousel-slide" style="background-image: url('foto2.jpg');"></div>
+            <div class="carousel-slide" style="background-image: url('foto3.jpg');"></div>
+            <div class="carousel-slide" style="background-image: url('foto4.jpg');"></div>
+        </div>
+    </section>
 
-    <h2 class="secao-titulo">Jardim de Memórias</h2>
-    
-    <div class="jardim-container">
-        <div class="foto-asa f1" style="background-image: url('foto1.jpg');"></div>
-        <div class="foto-asa f2" style="background-image: url('foto2.jpg');"></div>
-        <div class="separador-corpo"></div>
-        <div class="foto-asa f3" style="background-image: url('foto3.jpg');"></div>
-        <div class="foto-asa f4" style="background-image: url('foto4.jpg');"></div>
+    <div class="info-section">
+        <h2 class="countdown-title">O grande dia está chegando...</h2>
+        
+        <div class="countdown-box">
+            <div class="countdown-item"><span id="days">00</span><p>Dias</p></div>
+            <div class="countdown-item"><span id="hours">00</span><p>Horas</p></div>
+            <div class="countdown-item"><span id="minutes">00</span><p>Minutos</p></div>
+            <div class="countdown-item"><span id="seconds">00</span><p>Segundos</p></div>
+        </div>
+
+        <p class="endereco-texto">
+            <b>Espaço Arena Eventos</b>
+            Rua Bezerra de Menezes, 31 - Vaz Lobo<br>
+            Sábado, 13 de Junho de 2026 às 18:00h
+        </p>
+
+        <a href="https://maps.app.goo.gl/eCDrA3L6TmBZaxaa6" target="_blank" class="btn-maps">
+            📍 Ver localização no Mapa
+        </a>
     </div>
 
     <script>
-        const dataFesta = new Date("2026-10-15T21:00:00").getTime();
-        setInterval(function() {
-            const agora = new Date().getTime();
-            const d = dataFesta - agora;
-            document.getElementById("days").innerText = Math.floor(d / (1000 * 60 * 60 * 24));
-            document.getElementById("hours").innerText = String(Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
-            document.getElementById("minutes").innerText = String(Math.floor((d % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
-            document.getElementById("seconds").innerText = String(Math.floor((d % (1000 * 60)) / 1000)).padStart(2, '0');
+        let currentIdx = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        function updateCarousel() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active', 'prev', 'next');
+                if (index === currentIdx) slide.classList.add('active');
+                else if (index === (currentIdx - 1 + slides.length) % slides.length) slide.classList.add('prev');
+                else if (index === (currentIdx + 1) % slides.length) slide.classList.add('next');
+            });
+        }
+        function changeSlide(dir) {
+            currentIdx = (currentIdx + dir + slides.length) % slides.length;
+            updateCarousel();
+        }
+        setInterval(() => changeSlide(1), 5000);
+        updateCarousel();
+
+        const target = new Date("June 13, 2026 18:00:00").getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const d = target - now;
+            if (d > 0) {
+                document.getElementById("days").innerText = Math.floor(d / (1000 * 60 * 60 * 24));
+                document.getElementById("hours").innerText = String(Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+                document.getElementById("minutes").innerText = String(Math.floor((d % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+                document.getElementById("seconds").innerText = String(Math.floor((d % (1000 * 60)) / 1000)).padStart(2, '0');
+            }
         }, 1000);
     </script>
 </body>
