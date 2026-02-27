@@ -136,52 +136,64 @@
             position: absolute;
             background: rgba(206, 15, 105, 0.3);
             color: white; border: 2px solid rgba(206, 15, 105, 0.5);
-            width: 50px; height: 50px; border-radius: 50%;
+            width: 40px; height: 40px; border-radius: 50%;
             cursor: pointer; z-index: 15;
             display: flex; align-items: center; justify-content: center;
         }
 
         .btn-left { left: 20px; } .btn-right { right: 20px; }
 
-        /* --- SEÇÃO UNIFICADA (CRONÔMETRO + ENDEREÇO) --- */
+        /* --- SEÇÃO UNIFICADA (CRONÔMETRO REDUZIDO PARA MOBILE) --- */
         .info-section {
             text-align: center;
             margin-bottom: 80px;
-            padding: 40px 20px;
-            width: 100%;
-            background: rgba(206, 15, 105, 0.05); /* Leve fundo para unificar */
+            padding: 40px 10px;
+            width: 95%;
+            background: rgba(206, 15, 105, 0.05);
             border-radius: 30px;
             max-width: 800px;
         }
 
         .countdown-title {
             font-family: 'Great Vibes', cursive;
-            font-size: 2.8rem;
+            font-size: clamp(1.8rem, 8vw, 2.8rem);
             color: #ffffff;
             margin: 0 0 20px 0;
-            text-shadow: 0 0 10px #bf9b30, 0 0 20px #bf9b30, 0 0 30px #bf9b30;
+            text-shadow: 0 0 10px #bf9b30, 0 0 20px #bf9b30;
             animation: glowPulseGold 3s infinite;
         }
 
         .countdown-box { 
             display: flex; 
             justify-content: center; 
-            gap: 15px; 
-            flex-wrap: wrap;
+            gap: 8px; /* Gap reduzido */
             margin-bottom: 30px;
         }
 
         .countdown-item {
             background: rgba(206, 15, 105, 0.1);
             border: 1px solid rgba(206, 15, 105, 0.4);
-            border-radius: 10px; min-width: 80px; padding: 15px 5px;
+            border-radius: 10px; 
+            min-width: 70px; /* Largura mínima menor */
+            padding: 10px 5px;
         }
-        .countdown-item span { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: bold; text-shadow: 0 0 10px #ce0f69; display: block; }
-        .countdown-item p { font-size: 0.7rem; margin: 0; text-transform: uppercase; color: #ffb3d9; }
+        .countdown-item span { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 1.8rem; /* Fonte menor */
+            font-weight: bold; 
+            text-shadow: 0 0 10px #ce0f69; 
+            display: block; 
+        }
+        .countdown-item p { 
+            font-size: 0.6rem; /* Texto menor */
+            margin: 0; 
+            text-transform: uppercase; 
+            color: #ffb3d9; 
+        }
 
         .endereco-texto {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.1rem;
+            font-size: 1rem;
             line-height: 1.6;
             color: #f0f0f0;
             margin: 0 auto 25px auto;
@@ -189,35 +201,32 @@
 
         .endereco-texto b {
             color: #ffb3d9;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             display: block;
             margin-bottom: 8px;
             text-shadow: 0 0 10px rgba(206, 15, 105, 0.5);
         }
 
-        /* Botão Google Maps */
         .btn-maps {
             display: inline-flex;
             align-items: center;
-            padding: 12px 25px;
+            padding: 10px 20px;
             background: transparent;
             color: #bf9b30;
             border: 1px solid #bf9b30;
             border-radius: 50px;
             text-decoration: none;
             font-weight: bold;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             transition: 0.3s;
-            box-shadow: 0 0 10px rgba(191, 155, 48, 0.2);
         }
 
         .btn-maps:hover {
             background: #bf9b30;
             color: black;
             box-shadow: 0 0 20px #bf9b30;
-            transform: translateY(-3px);
         }
 
         @keyframes glowPulseGold {
@@ -227,10 +236,11 @@
 
         @media (max-width: 600px) {
             .carousel-slide { width: 180px; height: 260px; }
-            .carousel-slide.prev { transform: translateX(-90px) scale(0.7); }
-            .carousel-slide.next { transform: translateX(90px) scale(0.7); }
-            .countdown-title { font-size: 2rem; }
-            .endereco-texto { font-size: 0.9rem; }
+            .carousel-slide.prev { transform: translateX(-80px) scale(0.7); }
+            .carousel-slide.next { transform: translateX(80px) scale(0.7); }
+            .countdown-item { min-width: 65px; padding: 8px 2px; }
+            .countdown-item span { font-size: 1.5rem; }
+            .btn-left { left: 10px; } .btn-right { right: 10px; }
         }
     </style>
 </head>
@@ -251,8 +261,8 @@
     </nav>
 
     <section class="carousel-wrapper">
-        <button class="nav-btn btn-left" onclick="changeSlide(-1)">&#10094;</button>
-        <button class="nav-btn btn-right" onclick="changeSlide(1)">&#10095;</button>
+        <button class="nav-btn btn-left" onclick="changeSlide(-1)">❮</button>
+        <button class="nav-btn btn-right" onclick="changeSlide(1)">❯</button>
         <div class="carousel-container">
             <div class="carousel-slide" style="background-image: url('foto1.jpg');"></div>
             <div class="carousel-slide" style="background-image: url('foto2.jpg');"></div>
@@ -277,7 +287,7 @@
             Sábado, 13 de Junho de 2026 às 18:00h
         </p>
 
-        <a href="https://maps.app.goo.gl/eCDrA3L6TmBZaxaa6" target="_blank" class="btn-maps">
+        <a href="https://www.google.com/maps/search/?api=1&query=Rua+Bezerra+de+Menezes+31+Vaz+Lobo" target="_blank" class="btn-maps">
             📍 Ver localização no Mapa
         </a>
     </div>
