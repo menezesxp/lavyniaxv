@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>15 Anos - Lavynia</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle at center, #2e0316 0%, #050005 100%);
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png');
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        /* --- BANNER SIMÉTRICO ROSA COM ANIMAÇÕES --- */
+        .banner {
+            width: 100%;
+            height: 450px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(206, 15, 105, 0.3), rgba(5, 0, 5, 0.7)), 
+                        url('foto-banner.jpg'); 
+            background-size: cover;
+            background-position: center;
+            border-bottom: 3px solid #ce0f69;
+            box-shadow: 0 10px 40px rgba(206, 15, 105, 0.5);
+            position: relative;
+        }
+
+        /* ANIMAÇÃO DE FLUTUAR SUAVE */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* ANIMAÇÃO DE BRILHO PULSANTE */
+        @keyframes glowPulse {
+            0% { text-shadow: 0 0 15px #ce0f69, 0 0 30px #ce0f69; }
+            50% { text-shadow: 0 0 25px #ce0f69, 0 0 50px #ce0f69, 0 0 75px #ce0f69; }
+            100% { text-shadow: 0 0 15px #ce0f69, 0 0 30px #ce0f69; }
+        }
+
+        .nome-debutante {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(60px, 15vw, 130px);
+            color: #fff;
+            margin: 0;
+            line-height: 1;
+            /* Aplicação das animações */
+            animation: float 4s ease-in-out infinite, glowPulse 3s infinite;
+        }
+
+        /* ANIMAÇÃO DE BRILHO BRANCO PULSANTE PARA 15 ANOS */
+        @keyframes glowWhitePulse {
+            0% { text-shadow: 0 0 10px #ffffff, 0 0 20px #ce0f69; }
+            50% { text-shadow: 0 0 15px #ffffff, 0 0 30px #ffffff, 0 0 40px #ce0f69; }
+            100% { text-shadow: 0 0 10px #ffffff, 0 0 20px #ce0f69; }
+        }
+
+        .sobrenome {
+            /* NOVA FONTE MAIS CHAMATIVA (Playfair Display) */
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(24px, 8vw, 48px); /* Aumentado para mais destaque */
+            letter-spacing: 2px; /* Reduzido o espaçamento para a nova fonte */
+            text-transform: uppercase;
+            margin-top: 10px;
+            font-weight: 700;
+            color: #ffffff;
+            /* Aplicação das animações */
+            animation: float 4s ease-in-out infinite 0.5s, glowWhitePulse 3s infinite; /* Delay de 0.5s na flutuação */
+        }
+
+        /* --- BOTÕES LADO A LADO --- */
+        .menu-borboleta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: -40px;
+            z-index: 10;
+            width: 95%;
+            max-width: 800px;
+        }
+
+        .botao-borboleta {
+            background-image: url('botao-borboleta.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 25%; 
+            min-width: 85px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: clamp(8px, 2vw, 10px);
+            color: white;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        }
+
+        .botao-borboleta:hover {
+            transform: translateY(-5px) scale(1.05);
+            filter: drop-shadow(0 0 10px #ce0f69);
+        }
+
+        /* --- CONTADOR --- */
+        .countdown-container {
+            display: flex;
+            justify-content: space-around;
+            width: 90%;
+            max-width: 500px;
+            margin: 40px 0;
+            padding: 20px;
+            background: rgba(206, 15, 105, 0.05);
+            border-radius: 15px;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(206, 15, 105, 0.3);
+        }
+
+        .countdown-item span {
+            font-size: clamp(1.2rem, 5vw, 2.5rem);
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 0 10px #ce0f69;
+            display: block;
+        }
+
+        .countdown-item p {
+            font-size: 10px;
+            margin: 0;
+            color: #ff85b3;
+            text-transform: uppercase;
+        }
+
+        /* --- GALERIA JARDIM DE MEMÓRIAS --- */
+        .secao-titulo {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            color: #fff;
+            text-shadow: 0 0 20px #ce0f69;
+            margin: 30px 0;
+        }
+
+        .jardim-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            width: 95%;
+            margin-bottom: 50px;
+        }
+
+        .foto-asa {
+            background-size: cover;
+            background-position: center;
+            border: 1px solid #ce0f69;
+            box-shadow: 0 0 15px rgba(206, 15, 105, 0.4);
+        }
+
+        .f1 { width: 22%; height: 250px; border-radius: 80px 10px 10px 80px; }
+        .f2 { width: 18%; height: 200px; border-radius: 10px 50px 50px 10px; margin-top: 30px; }
+        .separador-corpo { width: 4px; height: 100px; background: #ce0f69; border-radius: 10px; box-shadow: 0 0 15px #ce0f69; }
+        .f3 { width: 18%; height: 200px; border-radius: 50px 10px 10px 50px; margin-top: 30px; }
+        .f4 { width: 22%; height: 250px; border-radius: 10px 80px 80px 10px; }
+
+        @media (max-width: 600px) {
+            .banner { height: 300px; }
+            .menu-borboleta { gap: 5px; margin-top: -30px; }
+            .botao-borboleta { height: 60px; min-width: 75px; }
+            .f1, .f2, .f3, .f4 { height: 140px; margin-top: 0 !important; }
+            .separador-corpo { height: 60px; }
+            .sobrenome { font-size: 24px; } /* Ajuste de tamanho mobile */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="stars"></div>
+
+    <section class="banner">
+        <h1 class="nome-debutante">Lavynia</h1>
+        <span class="sobrenome">15 Anos</span>
+    </section>
+
+    <nav class="menu-borboleta">
+        <a href="#" class="botao-borboleta">Confirmar</a>
+        <a href="#" class="botao-borboleta">Fotos</a>
+        <a href="#" class="botao-borboleta">Recados</a>
+        <a href="#" class="botao-borboleta">Presentes</a>
+    </nav>
+
+    <div class="countdown-container">
+        <div class="countdown-item"><span id="days">00</span><p>Dias</p></div>
+        <div class="countdown-item"><span id="hours">00</span><p>Hrs</p></div>
+        <div class="countdown-item"><span id="minutes">00</span><p>Min</p></div>
+        <div class="countdown-item"><span id="seconds">00</span><p>Seg</p></div>
+    </div>
+
+    <h2 class="secao-titulo">Jardim de Memórias</h2>
+    
+    <div class="jardim-container">
+        <div class="foto-asa f1" style="background-image: url('foto1.jpg');"></div>
+        <div class="foto-asa f2" style="background-image: url('foto2.jpg');"></div>
+        <div class="separador-corpo"></div>
+        <div class="foto-asa f3" style="background-image: url('foto3.jpg');"></div>
+        <div class="foto-asa f4" style="background-image: url('foto4.jpg');"></div>
+    </div>
+
+    <script>
+        const dataFesta = new Date("2026-10-15T21:00:00").getTime();
+        setInterval(function() {
+            const agora = new Date().getTime();
+            const d = dataFesta - agora;
+            document.getElementById("days").innerText = Math.floor(d / (1000 * 60 * 60 * 24));
+            document.getElementById("hours").innerText = String(Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+            document.getElementById("minutes").innerText = String(Math.floor((d % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+            document.getElementById("seconds").innerText = String(Math.floor((d % (1000 * 60)) / 1000)).padStart(2, '0');
+        }, 1000);
+    </script>
+</body>
+</html>
