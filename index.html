@@ -11,40 +11,36 @@
 
     <style>
         body {
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             background: radial-gradient(circle at center, #2e0316 0%, #050005 100%);
-            color: white;
-            font-family: 'Montserrat', sans-serif;
-            overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            color: white; font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden; display: flex; flex-direction: column; align-items: center;
         }
 
         .stars {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: url('https://www.transparenttextures.com/patterns/stardust.png');
-            z-index: -1;
-            opacity: 0.3;
+            z-index: -1; opacity: 0.3;
         }
+
+        /* --- PLAYER DE MÚSICA --- */
+        .music-control {
+            position: fixed; bottom: 20px; right: 20px; z-index: 1000;
+            background: linear-gradient(45deg, #bf9b30, #e9d18b);
+            width: 45px; height: 45px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; box-shadow: 0 0 15px rgba(191, 155, 48, 0.5);
+            border: none; outline: none; transition: 0.3s;
+        }
+        .music-control:hover { transform: scale(1.1); }
+        .music-control svg { fill: #2e0316; width: 20px; height: 20px; }
 
         /* --- BANNER PRINCIPAL --- */
         .banner {
-            width: 100%;
-            height: 450px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: linear-gradient(rgba(206, 15, 105, 0.3), rgba(5, 0, 5, 0.7)), 
-                        url('foto-banner.jpg'); 
-            background-size: cover;
-            background-position: center;
-            border-bottom: 3px solid #ce0f69;
+            width: 100%; height: 350px; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+            background: linear-gradient(rgba(206, 15, 105, 0.3), rgba(5, 0, 5, 0.7)), url('foto-banner.jpg'); 
+            background-size: cover; background-position: center; border-bottom: 3px solid #ce0f69;
             position: relative;
         }
 
@@ -53,194 +49,101 @@
             0%, 100% { text-shadow: 0 0 15px #ce0f69, 0 0 30px #ce0f69; }
             50% { text-shadow: 0 0 25px #ce0f69, 0 0 50px #ce0f69, 0 0 75px #ce0f69; }
         }
+        @keyframes pulseGold {
+            0% { box-shadow: 0 0 0 0 rgba(191, 155, 48, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(191, 155, 48, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(191, 155, 48, 0); }
+        }
 
         .nome-debutante {
-            font-family: 'Great Vibes', cursive;
-            font-size: clamp(60px, 15vw, 130px);
-            color: #fff;
-            margin: 0;
-            animation: float 4s ease-in-out infinite, glowPulsePink 3s infinite;
+            font-family: 'Great Vibes', cursive; font-size: clamp(60px, 15vw, 130px);
+            color: #fff; margin: 0; animation: float 4s ease-in-out infinite, glowPulsePink 3s infinite;
         }
 
         .sobrenome {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(24px, 8vw, 48px);
-            text-transform: uppercase;
-            font-weight: 700;
+            font-family: 'Playfair Display', serif; font-size: clamp(24px, 8vw, 48px);
+            text-transform: uppercase; font-weight: 700;
             animation: float 4s ease-in-out infinite 0.5s, glowPulsePink 3s infinite;
         }
 
         /* --- BOTÕES DE BORBOLETA --- */
         .menu-borboleta {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin-top: -40px;
-            z-index: 100;
-            width: 95%;
-            max-width: 800px;
+            display: flex; justify-content: center; align-items: center; gap: 10px;
+            margin-top: -40px; z-index: 100; width: 95%; max-width: 800px;
         }
 
         .botao-borboleta {
-            background-image: url('botao-borboleta.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
+            background-image: url('botao-borboleta.png'); background-size: contain;
+            background-repeat: no-repeat; background-position: center;
             width: 25%; min-width: 85px; height: 80px;
             display: flex; align-items: center; justify-content: center;
-            cursor: pointer; transition: 0.3s;
-            text-decoration: none; font-weight: bold; text-transform: uppercase;
-            font-size: clamp(8px, 2vw, 10px); color: white;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            cursor: pointer; transition: 0.3s; text-decoration: none;
+            font-weight: bold; text-transform: uppercase; font-size: clamp(8px, 2vw, 10px);
+            color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
         }
 
-        /* --- CARROSSEL --- */
-        .carousel-wrapper {
-            width: 100%;
-            max-width: 1200px;
-            margin: 60px 0;
-            position: relative;
-            height: 420px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        /* --- SEÇÕES --- */
+        .secao-pagina { width: 100%; display: flex; flex-direction: column; align-items: center; transition: 0.5s; }
+        .escondido { display: none !important; }
 
-        .carousel-container {
-            width: 100%; height: 100%;
-            position: relative;
-            display: flex; align-items: center; justify-content: center;
-        }
-
-        .carousel-slide {
-            position: absolute;
-            width: 320px; height: 400px;
-            background-size: cover; background-position: center;
-            border-radius: 15px;
-            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 0;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .carousel-slide.active {
-            opacity: 1; transform: scale(1.1); z-index: 5;
-            border: 2px solid #ce0f69;
-            box-shadow: 0 0 40px rgba(206, 15, 105, 0.7);
-        }
-
-        .carousel-slide.prev { opacity: 0.5; transform: translateX(-320px) scale(0.85); z-index: 3; filter: blur(2px); }
-        .carousel-slide.next { opacity: 0.5; transform: translateX(320px) scale(0.85); z-index: 3; filter: blur(2px); }
-
-        .nav-btn {
-            position: absolute;
-            background: rgba(206, 15, 105, 0.3);
-            color: white; border: 2px solid rgba(206, 15, 105, 0.5);
-            width: 40px; height: 40px; border-radius: 50%;
-            cursor: pointer; z-index: 15;
-            display: flex; align-items: center; justify-content: center;
-        }
-
-        .btn-left { left: 20px; } .btn-right { right: 20px; }
-
-        /* --- SEÇÃO UNIFICADA (CRONÔMETRO REDUZIDO PARA MOBILE) --- */
+        /* --- INFO SECTION --- */
         .info-section {
-            text-align: center;
-            margin-bottom: 80px;
-            padding: 40px 10px;
-            width: 95%;
-            background: rgba(206, 15, 105, 0.05);
-            border-radius: 30px;
-            max-width: 800px;
+            text-align: center; margin-bottom: 80px; padding: 40px 15px; width: 90%;
+            background: rgba(206, 15, 105, 0.05); border-radius: 30px; max-width: 800px;
+            border: 1px solid rgba(206, 15, 105, 0.2);
         }
 
         .countdown-title {
-            font-family: 'Great Vibes', cursive;
-            font-size: clamp(1.8rem, 8vw, 2.8rem);
-            color: #ffffff;
-            margin: 0 0 20px 0;
-            text-shadow: 0 0 10px #bf9b30, 0 0 20px #bf9b30;
-            animation: glowPulseGold 3s infinite;
+            font-family: 'Great Vibes', cursive; font-size: clamp(1.8rem, 8vw, 2.8rem);
+            color: #ffffff; margin-bottom: 25px; text-shadow: 0 0 10px #bf9b30;
         }
 
-        .countdown-box { 
-            display: flex; 
-            justify-content: center; 
-            gap: 8px; /* Gap reduzido */
-            margin-bottom: 30px;
-        }
-
-        .countdown-item {
-            background: rgba(206, 15, 105, 0.1);
-            border: 1px solid rgba(206, 15, 105, 0.4);
-            border-radius: 10px; 
-            min-width: 70px; /* Largura mínima menor */
-            padding: 10px 5px;
+        /* --- CRONÔMETRO --- */
+        .countdown-box { display: flex; justify-content: center; gap: 8px; margin-bottom: 30px; }
+        .countdown-item { 
+            background: rgba(206, 15, 105, 0.1); border: 1px solid rgba(206, 15, 105, 0.4); 
+            border-radius: 10px; min-width: 65px; padding: 10px 5px; 
         }
         .countdown-item span { 
-            font-family: 'Playfair Display', serif; 
-            font-size: 1.8rem; /* Fonte menor */
-            font-weight: bold; 
-            text-shadow: 0 0 10px #ce0f69; 
-            display: block; 
+            font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: bold; 
+            text-shadow: 0 0 10px #ce0f69; display: block; 
         }
-        .countdown-item p { 
-            font-size: 0.6rem; /* Texto menor */
-            margin: 0; 
-            text-transform: uppercase; 
-            color: #ffb3d9; 
+        .countdown-item p { font-size: 0.6rem; color: #ffb3d9; text-transform: uppercase; margin: 0; }
+
+        /* --- BOTÃO CONFIRMAR --- */
+        .btn-confirmar-home {
+            display: inline-block; background: linear-gradient(45deg, #bf9b30, #ffebad, #bf9b30);
+            background-size: 200% auto; color: #2e0316; font-weight: 800; text-decoration: none;
+            padding: 12px 30px; border-radius: 50px; text-transform: uppercase;
+            font-size: 0.85rem; letter-spacing: 1.5px; margin-top: 15px;
+            animation: pulseGold 2s infinite; transition: 0.3s; border: none;
         }
 
-        .endereco-texto {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1rem;
-            line-height: 1.6;
-            color: #f0f0f0;
-            margin: 0 auto 25px auto;
+        .btn-localizacao {
+            display: inline-flex; align-items: center; justify-content: center;
+            background: rgba(255, 255, 255, 0.05); color: #ffb3d9; border: 1px solid rgba(206, 15, 105, 0.5);
+            font-weight: bold; text-decoration: none; padding: 12px 25px; border-radius: 50px;
+            text-transform: uppercase; font-size: 0.8rem; margin-top: 20px;
         }
 
-        .endereco-texto b {
-            color: #ffb3d9;
-            font-size: 1.3rem;
-            display: block;
-            margin-bottom: 8px;
-            text-shadow: 0 0 10px rgba(206, 15, 105, 0.5);
-        }
+        /* --- CARROSSEL --- */
+        .carousel-wrapper { width: 100%; max-width: 1200px; margin: 60px 0; position: relative; height: 420px; display: flex; align-items: center; justify-content: center; }
+        .carousel-container { width: 100%; height: 100%; position: relative; display: flex; align-items: center; justify-content: center; }
+        .carousel-slide { position: absolute; width: 320px; height: 400px; background-size: cover; background-position: center; border-radius: 15px; transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1); opacity: 0; border: 1px solid rgba(255, 255, 255, 0.1); }
+        .carousel-slide.active { opacity: 1; transform: scale(1.1); z-index: 5; border: 2px solid #ce0f69; box-shadow: 0 0 40px rgba(206, 15, 105, 0.7); }
+        .carousel-slide.prev { opacity: 0.5; transform: translateX(-320px) scale(0.85); z-index: 3; filter: blur(2px); }
+        .carousel-slide.next { opacity: 0.5; transform: translateX(320px) scale(0.85); z-index: 3; filter: blur(2px); }
+        .nav-btn { position: absolute; background: rgba(206, 15, 105, 0.3); color: white; border: 2px solid rgba(206, 15, 105, 0.5); width: 40px; height: 40px; border-radius: 50%; cursor: pointer; z-index: 15; display: flex; align-items: center; justify-content: center; }
 
-        .btn-maps {
-            display: inline-flex;
-            align-items: center;
-            padding: 10px 20px;
-            background: transparent;
-            color: #bf9b30;
-            border: 1px solid #bf9b30;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: 0.3s;
-        }
-
-        .btn-maps:hover {
-            background: #bf9b30;
-            color: black;
-            box-shadow: 0 0 20px #bf9b30;
-        }
-
-        @keyframes glowPulseGold {
-            0%, 100% { text-shadow: 0 0 10px #bf9b30, 0 0 20px #bf9b30; }
-            50% { text-shadow: 0 0 20px #bf9b30, 0 0 40px #bf9b30; }
-        }
+        .lojas-destaque { background: rgba(191, 155, 48, 0.1); border: 1px dashed #bf9b30; padding: 15px; border-radius: 15px; margin-top: 20px; color: #e9d18b; font-size: 1rem; line-height: 1.6; }
+        .lista-presentes { text-align: left; max-width: 500px; margin: 20px auto; list-style: none; padding: 0; }
+        .lista-presentes li { padding: 12px 0; border-bottom: 1px solid rgba(206, 15, 105, 0.2); display: flex; align-items: center; }
+        .lista-presentes li::before { content: "🌸"; margin-right: 15px; }
 
         @media (max-width: 600px) {
             .carousel-slide { width: 180px; height: 260px; }
             .carousel-slide.prev { transform: translateX(-80px) scale(0.7); }
             .carousel-slide.next { transform: translateX(80px) scale(0.7); }
-            .countdown-item { min-width: 65px; padding: 8px 2px; }
-            .countdown-item span { font-size: 1.5rem; }
-            .btn-left { left: 10px; } .btn-right { right: 10px; }
         }
     </style>
 </head>
@@ -248,51 +151,136 @@
 
     <div class="stars"></div>
 
+    <audio id="bgMusic" loop>
+        <source src="sua-musica.mp3" type="audio/mpeg">
+    </audio>
+
+    <button class="music-control" onclick="toggleMusic()">
+        <svg id="musicIcon" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+    </button>
+
     <section class="banner">
         <h1 class="nome-debutante">Lavynia</h1>
         <span class="sobrenome">15 Anos</span>
     </section>
 
     <nav class="menu-borboleta">
-        <a href="#" class="botao-borboleta">Confirmar</a>
-        <a href="#" class="botao-borboleta">Fotos</a>
-        <a href="#" class="botao-borboleta">Recados</a>
-        <a href="#" class="botao-borboleta">Presentes</a>
+        <a href="javascript:void(0)" onclick="navegar('home')" class="botao-borboleta">Início</a>
+        <a href="javascript:void(0)" onclick="navegar('confirmar')" class="botao-borboleta">Confirmar</a>
+        <a href="javascript:void(0)" onclick="navegar('fotos')" class="botao-borboleta">Fotos</a>
+        <a href="javascript:void(0)" onclick="navegar('presentes')" class="botao-borboleta">Presentes</a>
     </nav>
 
-    <section class="carousel-wrapper">
-        <button class="nav-btn btn-left" onclick="changeSlide(-1)">❮</button>
-        <button class="nav-btn btn-right" onclick="changeSlide(1)">❯</button>
-        <div class="carousel-container">
-            <div class="carousel-slide" style="background-image: url('foto1.jpg');"></div>
-            <div class="carousel-slide" style="background-image: url('foto2.jpg');"></div>
-            <div class="carousel-slide" style="background-image: url('foto3.jpg');"></div>
-            <div class="carousel-slide" style="background-image: url('foto4.jpg');"></div>
+    <div id="home" class="secao-pagina">
+        <section class="carousel-wrapper">
+            <button class="nav-btn" style="left:20px;" onclick="changeSlide(-1)">❮</button>
+            <button class="nav-btn" style="right:20px;" onclick="changeSlide(1)">❯</button>
+            <div class="carousel-container">
+                <div class="carousel-slide" style="background-image: url('foto1.jpg');"></div>
+                <div class="carousel-slide" style="background-image: url('foto2.jpg');"></div>
+                <div class="carousel-slide" style="background-image: url('foto3.jpg');"></div>
+                <div class="carousel-slide" style="background-image: url('foto4.jpg');"></div>
+            </div>
+        </section>
+
+        <div class="info-section">
+            <h2 class="countdown-title">O grande dia está chegando...</h2>
+            
+            <div class="countdown-box">
+                <div class="countdown-item"><span id="days">00</span><p>Dias</p></div>
+                <div class="countdown-item"><span id="hours">00</span><p>Horas</p></div>
+                <div class="countdown-item"><span id="minutes">00</span><p>Minutos</p></div>
+                <div class="countdown-item"><span id="seconds">00</span><p>Segundos</p></div>
+            </div>
+
+            <p style="font-size: 1rem; color: #f0f0f0; margin-bottom: 10px; line-height: 1.6; padding: 0 20px;">
+                Confirme sua presença! Quero saber se terei o privilégio de tê-lo conosco nesse dia tão especial.
+            </p>
+            <a href="javascript:void(0)" onclick="navegar('confirmar')" class="btn-confirmar-home">Confirmar Presença</a>
+
+            <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(206, 15, 105, 0.2);">
+                <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 5px;">
+                    <b style="color: #ffb3d9; font-size: 1.3rem; display: block;">Espaço Arena Eventos</b>
+                    Rua Bezerra de Menezes, 31 - Vaz Lobo<br>
+                    Sábado, 13 de Junho de 2026 às 18:00h
+                </p>
+                <a href="http://maps.google.com/?q=Rua+Bezerra+de+Menezes+31+Vaz+Lobo" target="_blank" class="btn-localizacao">📍 Ver localização no Mapa</a>
+            </div>
         </div>
-    </section>
+    </div>
 
-    <div class="info-section">
-        <h2 class="countdown-title">O grande dia está chegando...</h2>
-        
-        <div class="countdown-box">
-            <div class="countdown-item"><span id="days">00</span><p>Dias</p></div>
-            <div class="countdown-item"><span id="hours">00</span><p>Horas</p></div>
-            <div class="countdown-item"><span id="minutes">00</span><p>Minutos</p></div>
-            <div class="countdown-item"><span id="seconds">00</span><p>Segundos</p></div>
+    <div id="fotos" class="secao-pagina escondido">
+        <div class="info-section" style="margin-top: 60px;">
+            <h2 class="countdown-title">Fotos do Ensaio</h2>
+            <p style="color: #bf9b30; text-transform: uppercase; letter-spacing: 2px; font-weight: bold;">Imagens especiais de minha história</p>
+            <p>Veja alguns dos momentos especiais da minha vida!</p>
+            <hr style="border: 0; border-top: 1px solid rgba(206, 15, 105, 0.3); width: 60%; margin: 20px auto;">
+            <p style="font-style: italic; color: #ffb3d9;">Em breve as fotos estarão aqui...</p>
+            <br><a href="javascript:void(0)" onclick="navegar('home')" style="color: white; opacity: 0.6; font-size: 0.8rem;">← Voltar</a>
         </div>
+    </div>
 
-        <p class="endereco-texto">
-            <b>Espaço Arena Eventos</b>
-            Rua Bezerra de Menezes, 31 - Vaz Lobo<br>
-            Sábado, 13 de Junho de 2026 às 18:00h
-        </p>
+    <div id="confirmar" class="secao-pagina escondido">
+        <div class="info-section" style="margin-top: 60px;">
+            <h2 class="countdown-title">Confirmação</h2>
+            <p style="line-height: 1.8; padding: 0 20px;">É com muita alegria que esperamos você para comemorarmos juntos esses 15 anos de história.</p>
+            <p style="font-size: 0.95rem; font-style: italic; color: #f0f0f0; padding: 0 20px;">Confirme sua presença! Quero saber se terei o privilégio de tê-lo conosco nesse dia tão especial.</p>
+            <div style="font-family: 'Great Vibes', cursive; font-size: 2.2rem; color: #ffb3d9; margin: 20px 0;">Com carinho, Lavynia</div>
+            
+            <a href="https://wa.me/5521999999999" target="_blank" style="background: #25d366; color: white; border-radius: 50px; padding: 15px 30px; text-decoration: none; font-weight: bold; display: inline-block;">Confirmar via WhatsApp</a>
+            <br><br><a href="javascript:void(0)" onclick="navegar('home')" style="color: white; opacity: 0.6; font-size: 0.8rem;">← Voltar ao início</a>
+        </div>
+    </div>
 
-        <a href="https://maps.app.goo.gl/GVJVNVRzAZBCcQTWA" target="_blank" class="btn-maps">
-            📍 Ver localização no Mapa
-        </a>
+    <div id="presentes" class="secao-pagina escondido">
+        <div class="info-section" style="margin-top: 60px;">
+            <h2 class="countdown-title">Presentes</h2>
+            <p style="color: #bf9b30; text-transform: uppercase; letter-spacing: 3px; font-size: 1.2rem; margin-bottom: 25px;">Sugestões</p>
+            <div style="display: flex; justify-content: center; gap: 15px; margin: 20px 0;">
+                <div style="background: rgba(206, 15, 105, 0.15); border: 1px solid #ce0f69; padding: 10px 20px; border-radius: 15px;"><span>Visto</span><b style="font-size: 1.2rem; display: block;">36</b></div>
+                <div style="background: rgba(206, 15, 105, 0.15); border: 1px solid #ce0f69; padding: 10px 20px; border-radius: 15px;"><span>Calço</span><b style="font-size: 1.2rem; display: block;">37</b></div>
+            </div>
+            <ul class="lista-presentes">
+                <li>Maquiagens e Skincare</li>
+                <li>Perfumes e Fragrâncias</li>
+                <li>Acessórios e Joias</li>
+            </ul>
+            <div class="lojas-destaque">
+                <span style="font-size: 0.8rem; color: #ffb3d9; text-transform: uppercase; display: block; margin-bottom: 5px;">Dicas de lojas que curto:</span>
+                <b>Sephora, Vivara, Pandora, O Boticário ou Renner.</b>
+            </div>
+            <br><a href="javascript:void(0)" onclick="navegar('home')" style="color: white; opacity: 0.6; font-size: 0.8rem;">← Voltar ao início</a>
+        </div>
     </div>
 
     <script>
+        // Função Música
+        const music = document.getElementById("bgMusic");
+        const icon = document.getElementById("musicIcon");
+
+        function toggleMusic() {
+            if (music.paused) {
+                music.play();
+                icon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>'; // Ícone Pause
+            } else {
+                music.pause();
+                icon.innerHTML = '<path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>'; // Ícone Play
+            }
+        }
+
+        // Tentar tocar no primeiro clique na página
+        document.body.addEventListener('click', function() {
+            if (music.paused) music.play();
+            icon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+        }, { once: true });
+
+        function navegar(alvo) {
+            document.querySelectorAll('.secao-pagina').forEach(s => s.classList.add('escondido'));
+            document.getElementById(alvo).classList.remove('escondido');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Carousel e Cronômetro (Mantidos)
         let currentIdx = 0;
         const slides = document.querySelectorAll('.carousel-slide');
         function updateCarousel() {
@@ -323,5 +311,4 @@
         }, 1000);
     </script>
 </body>
-
 </html>
