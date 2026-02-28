@@ -140,10 +140,25 @@
         .lista-presentes li { padding: 12px 0; border-bottom: 1px solid rgba(206, 15, 105, 0.2); display: flex; align-items: center; }
         .lista-presentes li::before { content: "🌸"; margin-right: 15px; }
 
+        /* --- AJUSTES MOBILE (BANNER MENOR E SEM ESPAÇOS VAZIOS) --- */
         @media (max-width: 600px) {
+            .banner { height: 230px !important; }
+            .nome-debutante { font-size: 75px !important; }
+            .menu-borboleta { margin-top: -30px !important; margin-bottom: 5px !important; }
+            
+            .carousel-wrapper { 
+                margin: 15px 0 5px 0 !important; 
+                height: 290px !important; 
+            }
             .carousel-slide { width: 180px; height: 260px; }
             .carousel-slide.prev { transform: translateX(-80px) scale(0.7); }
             .carousel-slide.next { transform: translateX(80px) scale(0.7); }
+
+            .info-section { 
+                margin-top: 0px !important; 
+                margin-bottom: 40px !important; 
+                padding: 20px 15px !important; 
+            }
         }
     </style>
 </head>
@@ -227,7 +242,7 @@
             <p style="font-size: 0.95rem; font-style: italic; color: #f0f0f0; padding: 0 20px;">Confirme sua presença! Quero saber se terei o privilégio de tê-lo conosco nesse dia tão especial.</p>
             <div style="font-family: 'Great Vibes', cursive; font-size: 2.2rem; color: #ffb3d9; margin: 20px 0;">Com carinho, Lavynia</div>
             
-            <a href="https://wa.me/5521999999999" target="_blank" style="background: #25d366; color: white; border-radius: 50px; padding: 15px 30px; text-decoration: none; font-weight: bold; display: inline-block;">Confirmar via WhatsApp</a>
+            <a href="https://wa.me/" target="_blank" style="background: #25d366; color: white; border-radius: 50px; padding: 15px 30px; text-decoration: none; font-weight: bold; display: inline-block;">Confirmar via WhatsApp</a>
             <br><br><a href="javascript:void(0)" onclick="navegar('home')" style="color: white; opacity: 0.6; font-size: 0.8rem;">← Voltar ao início</a>
         </div>
     </div>
@@ -254,21 +269,19 @@
     </div>
 
     <script>
-        // Função Música
         const music = document.getElementById("bgMusic");
         const icon = document.getElementById("musicIcon");
 
         function toggleMusic() {
             if (music.paused) {
                 music.play();
-                icon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>'; // Ícone Pause
+                icon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
             } else {
                 music.pause();
-                icon.innerHTML = '<path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>'; // Ícone Play
+                icon.innerHTML = '<path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>';
             }
         }
 
-        // Tentar tocar no primeiro clique na página
         document.body.addEventListener('click', function() {
             if (music.paused) music.play();
             icon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
@@ -280,7 +293,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Carousel e Cronômetro (Mantidos)
         let currentIdx = 0;
         const slides = document.querySelectorAll('.carousel-slide');
         function updateCarousel() {
